@@ -12,7 +12,11 @@ public class Complex {
 	public Complex(double re, double im) {
 		setValues(re,im);
 	}
-
+	
+	public Complex(Complex other){
+		setValues(other.re,other.im);
+	}
+	
 	public void setValues(double re, double im){
 		this.re = re;
 		this.im = im;
