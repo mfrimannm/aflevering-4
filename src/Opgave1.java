@@ -4,7 +4,7 @@ public class Opgave1 {
 		
 	public static void main(String[] args) {
 
-		Complex z0 = new Complex(4, 2);
+		Complex z0 = new Complex(-0.5, 0);
 		System.out.println(z0.toString());
 		System.out.println("begin iterate");
 		int max = iterate(z0);
