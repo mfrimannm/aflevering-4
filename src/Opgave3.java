@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Opgave3 {
@@ -8,6 +9,8 @@ public class Opgave3 {
 		System.out.println("Hvor grid skal der simulueres");
 		int grid = getNumberPositive(scan);
 		GameOfLife life = new GameOfLife(grid);
+		
+		System.out.println(Arrays.deepToString(life.getLIFEGRID()));
 		
 		System.out.println("Hvor mange generationer skal der simulueres");
 		int generations = getNumberPositive(scan);
