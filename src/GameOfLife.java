@@ -14,7 +14,12 @@ public class GameOfLife {
 		// random life
 		for (int i = 0; i < getLIFEGRID().length; i++) {
 			for (int j = 0; j < getLIFEGRID().length; j++) {
-				getLIFEGRID()[i][j] = (int) (Math.random() * 2);
+				int random = (int) (Math.random() * 10);
+				if (random > 7) {
+					getLIFEGRID()[i][j] = 1;
+				} else {
+					getLIFEGRID()[i][j] = 0;
+				}
 			}
 		}
 		drawLife();
@@ -47,18 +52,27 @@ public class GameOfLife {
 
 		for (int i = 0; i < getLIFEGRID().length; i++) {
 			for (int j = 0; j < getLIFEGRID().length; j++) {
-				if ((getLIFEGRIDAt(i, j) == 0 && liveNeighbours(i, i) == 3)
-						|| (getLIFEGRIDAt(i, j)) == 1
-						&& (liveNeighbours(i, j) > 2 && !(liveNeighbours(i, j) > 3))) {
+
+				if ((getLIFEGRIDAt(i, j) == 0 && liveNeighbours(i, j) == 3)) {
 					LifeGrid_next[i][j] = 1;
-				} else {
-					LifeGrid_next[i][j] = 0;
 				}
+				if ((getLIFEGRIDAt(i, j)) == 1) {
+					if ((liveNeighbours(i, j) > 3)) {
+						LifeGrid_next[i][j] = 0;
+					}
+					if (liveNeighbours(i, j) < 2) {
+						LifeGrid_next[i][j] = 0;
+					}
+				}
+				if (liveNeighbours(i, j) == 2 || liveNeighbours(i, j) == 3) {
+					LifeGrid_next[i][j] = 1;
+				}
+
 			}
 		}
+		drawLife();
 		GENERATION++;
 		LIFEGRID = LifeGrid_next;
-		drawLife();
 	}
 
 	private int liveNeighbours(int x, int y) {
@@ -69,7 +83,7 @@ public class GameOfLife {
 		for (int i = -1; i < 2; i++) {
 			for (int j = -1; j < 2; j++) {
 				if (i == 0 && j == 0) {
-
+					// do nothing
 				} else {
 					if ((x - i > 0 && y - j > 0)
 							&& (x - i < LIFEGRID.length && y - j < LIFEGRID.length)) {
@@ -80,31 +94,30 @@ public class GameOfLife {
 				}
 			}
 		}
-
 		return countLife;
 	}
 
 	private void drawLife() {
 		StdDraw.clear();
-		StdDraw.show(100);
+		StdDraw.show(0);
 		if (GENERATION == 0) {
 			int min = 0;
 			int max = SIZE;
 			StdDraw.setXscale(min, max);
 			StdDraw.setYscale(min, max);
-			StdDraw.setPenRadius(6.0 / 2000);
+			StdDraw.setPenRadius(6.0 / 1000);
 			StdDraw.setPenColor(StdDraw.RED);
-			StdDraw.square(0, 0, SIZE);
-			
 		}
-
+		StdDraw.square(SIZE / 2, SIZE / 2, SIZE / 2);
 		for (int i = 0; i < getLIFEGRID().length; i++) {
 			for (int j = 0; j < getLIFEGRID().length; j++) {
-				if (getLIFEGRIDAt(i, j) == 0) {
+				if (getLIFEGRIDAt(i, j) == 1) {
 					StdDraw.point(i, j);
 				}
 			}
 		}
+		
+		StdDraw.show(70);
 	}
 
 }
