@@ -27,7 +27,7 @@ public class GameOfLife {
 
 	public GameOfLife(int[][] initialState) {
 		// den skal tage størrelsen af int[][] og bruge til at lave griddet
-		SIZE = initialState.length;
+		SIZE = 512;
 		setLIFEGRID(initialState);
 		GENERATION = 0;
 		drawLife();
@@ -117,7 +117,7 @@ public class GameOfLife {
 			}
 		}
 		
-		StdDraw.show(70);
+		StdDraw.show(60);
 	}
 
 }
