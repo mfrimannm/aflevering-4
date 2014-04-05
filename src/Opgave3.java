@@ -10,35 +10,41 @@ public class Opgave3 {
 		Scanner scan = new Scanner(System.in);
 		// hvilke fil vil du have...
 		File file = new File("pulsar.gol");
-        Scanner in = new Scanner(file);
-        int[][] initialState = lavArrayFromFile(in);
+		Scanner in = new Scanner(file);
+		int[][] initialState = lavArrayFromFile(in);
 		GameOfLife life = new GameOfLife(initialState);
-        
-        
-//      System.out.println("Hvor grid skal der simulueres");
+
+		// File f = new File("problem.dat");
+		// s1 = readEntireFile(new Scanner(f));
+
+//		System.out.println("Hvor grid skal der simulueres");
 //		int grid = getNumberPositive(scan);
 //		GameOfLife life = new GameOfLife(grid);
-		
+
 		System.out.println(Arrays.deepToString(life.getLIFEGRID()));
-		
+
 		System.out.println("Hvor mange generationer skal der simulueres");
 		int generations = getNumberPositive(scan);
-		for(int i=0;i<=generations;i++){
+		for (int i = 0; i <= generations; i++) {
 			life.nextState();
 		}
 		System.out.println("done");
-		
-		
-		
+
 		// til allerde sidst
 		scan.close();
-		in.close();
+		// in.close();
 	}
 
 	private static int[][] lavArrayFromFile(Scanner in) {
-		int[][] initialState;
-		
-		
+		int n = 512;
+		int[][] initialState = new int[n][n];
+		while (in.hasNextLine()) {
+			for (int i = 0; i <= 10; i++) {
+				for (int j = 0; j <= 10; j++) {
+					initialState[i][j] = in.nextInt();
+				}
+			}
+		}
 		// TODO Auto-generated method stub
 		return initialState;
 	}
